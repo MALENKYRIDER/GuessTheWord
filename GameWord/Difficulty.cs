@@ -23,7 +23,7 @@
                 case DifficultyType.Hard:
                     Attempts = 6;
                     MinWordLength = 5;
-                    MaxWordLength = 7;
+                    MaxWordLength = 8;
                     break;
             }
         }
