@@ -21,7 +21,7 @@ namespace GameWord
                 char letter = ui.InputLetter();
                 game.Guess(letter);
             }
-
+            
             if (game.IsWon) 
                 Console.WriteLine("Congratulations! You won the game!");
             else
