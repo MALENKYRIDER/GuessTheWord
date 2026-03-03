@@ -12,43 +12,20 @@ namespace GameWord
             var difficultyType = ui.ChooseDifficulty();
             var difficulty = new Difficulty(difficultyType);
             var word = wordBank.Generate(difficulty);
-            var guessedLetters = new List<char>();
-            var attemptsLeft = difficulty.Attempts;
-
-            while (attemptsLeft > 0)
-            {
-                var mask = word.GetMask(guessedLetters.ToArray());
-                ui.ShowGameState(mask, attemptsLeft);
-
-                if (!mask.Contains("*"))
-                {
-                    Console.WriteLine("You won");
-                    return;
-                }
-
-                char letter = ui.InputLetter();
-
-                if (guessedLetters.Contains(letter))
-                {
-                    Console.WriteLine("you already guessed this letter");
-                    continue;
-                }
-                
-                guessedLetters.Add(letter);
-
-                if (!word.Contains(letter))
-                {
-                    attemptsLeft--;
-                    Console.WriteLine("Wrong letter. Minus 1 attempt");
-                }
-                else
-                {
-                    Console.WriteLine("Right letter, congrats!");
-                }
-            }
             
-            Console.WriteLine("You lost " +
-                              "Better luck next time!");
+            var game = new Game(difficulty, word);
+
+            while (!game.IsWon && !game.IsLost)
+            {
+                ui.ShowGameState(game.Mask, game.AttemptsLeft, game.GuessedLetters);
+                char letter = ui.InputLetter();
+                game.Guess(letter);
+            }
+
+            if (game.IsWon) 
+                Console.WriteLine("Congratulations! You won the game!");
+            else
+                Console.WriteLine("You lost the game! Better luck next time!");
         }
     }
 }
