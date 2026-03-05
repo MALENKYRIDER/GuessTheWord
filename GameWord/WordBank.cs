@@ -21,7 +21,6 @@ namespace GameWord
                 new Word("family"),
                 new Word("teacher"),
                 new Word("computer"),
-                new Word("creatine"),
             };
         }
 
