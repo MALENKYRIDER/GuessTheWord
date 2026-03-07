@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GameWord
 {
@@ -46,7 +47,7 @@ namespace GameWord
             }
         }
         
-        public void ShowGameState(string maskedWord, int attempts)
+        public void ShowGameState(string maskedWord, int attempts, HashSet<char> guessedLetters)
         {
             Console.WriteLine();
             Console.WriteLine($"Word: {maskedWord}");
